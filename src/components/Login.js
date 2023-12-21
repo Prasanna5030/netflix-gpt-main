@@ -5,9 +5,9 @@ import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { bg_img, login_icon } from '../utils/constants';
 
 
 const Login = () => {
@@ -19,7 +19,6 @@ const Login = () => {
 
     const mail = useRef(null);
     const Password = useRef(null);
-    const navigate=useNavigate();
     const dispatch=useDispatch();
 
     const togglesignInForm = () => {
@@ -46,7 +45,7 @@ const Login = () => {
                     console.log(user);
 
                     updateProfile(user , {
-                        displayName: name , photoURL: ""
+                        displayName: name , photoURL:login_icon
                       }).then(() => {
 
                         // Profile updated!
@@ -55,10 +54,8 @@ const Login = () => {
                             uid:uid,
                             name:name,
                             displayName:displayName,
-                            photoURL:photoURL
+                            photoURL:login_icon 
                         }))
-
-                        navigate("/browse");
 
                       }).catch((error) => {
                         // An error occurred
@@ -81,8 +78,7 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    console.log(user);
-                    navigate("/browse");
+              
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -96,10 +92,10 @@ const Login = () => {
         <>
             <Header />
             <div className="absolute">
-                <img src="https://assets.nflxext.com/ffe/siteui/vlv3/ca6a7616-0acb-4bc5-be25-c4deef0419a7/c5af601a-6657-4531-8f82-22e629a3795e/IN-en-20231211-popsignuptwoweeks-perspective_alpha_website_small.jpg" alt="backgroundimage" className='h-max' />
+                <img src={bg_img} alt="backgroundimage" className='h-max' />
             </div>
 
-            <div className="login-form absolute w-1/3 mx-auto right-0 left-0 my-36 bg-black bg-opacity-80  h-screen">
+            <div className="login-form absolute w-1/3 mx-auto right-0 left-0 my-36 bg-black bg-opacity-80  h-fit">
                 <form onSubmit={(e) => e.preventDefault()} className="mx-10 my-16 text-white">
                     <h3 className='font-bold text-3xl px-3 mb-2 '>{isSignInForm ? "Sign In" : "Sign Up"}</h3>
                     {!isSignInForm && <input type='text' name="name" placeholder=" enter your name" value={name} onChange={(e) => setName(e.target.value)} className="m-2 p-4  w-full rounded-lg bg-gray-700 ml-2" />}
