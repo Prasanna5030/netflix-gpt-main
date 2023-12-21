@@ -4,3 +4,8 @@
 @tailwind utilities;
 
 
+.example::-webkit-scrollbar {
+    display: none;
+  }
+  
+

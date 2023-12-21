@@ -27,9 +27,7 @@ const Login = () => {
 
     const handleClick = () => {
 
-        console.log(name, email, password);
 
-        console.log(mail.current.value, Password.current.value);
         const message = checkValidData(mail.current.value, Password.current.value);
         setErrorMessage(message);
         if (message) return;
@@ -42,7 +40,7 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
-                    console.log(user);
+                
 
                     updateProfile(user , {
                         displayName: name , photoURL:login_icon

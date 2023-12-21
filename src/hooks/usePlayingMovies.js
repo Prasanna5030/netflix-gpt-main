@@ -10,7 +10,6 @@ const URL="https://api.themoviedb.org/3/movie/now_playing?page=1";
  const getNowPlayingMovies= async(api_URL, options)=>{
    const response = await fetch(api_URL,options);
    const data=await response.json();
-   console.log(data.results);
    dispatch(addNowPlayingMovies(data.results));
  }
 
